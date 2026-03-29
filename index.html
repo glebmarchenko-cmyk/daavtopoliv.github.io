@@ -12,11 +12,33 @@
             background: #f5f5f5;
         }
 
+        /* НАВИГАЦИЯ */
+        nav {
+            background: #1b5e20;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-        header {
-            background: #2e7d32;
+        nav a {
             color: white;
-            padding: 30px 20px;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url("img/my-background.jpg") center/cover no-repeat;
+            color: white;
+            padding: 80px 20px;
             text-align: center;
         }
 
@@ -27,11 +49,12 @@
 
         header p {
             font-size: 18px;
-            margin: 5px 0 0 0;
+            margin-top: 10px;
         }
 
+        /* СЕКЦИИ */
         section {
-            padding: 50px 20px;
+            padding: 40px 20px;
             text-align: center;
         }
 
@@ -40,22 +63,53 @@
             margin-bottom: 20px;
         }
 
+        p {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* КНОПКИ */
         .btn {
             display: inline-block;
-            padding: 15px 30px;
-            background: #1877F2; /* Max синий */
+            padding: 12px 25px;
+            background: #1877F2;
             color: white;
             text-decoration: none;
-            font-size: 18px;
-            border-radius: 12px;
-            font-weight: bold;
+            border-radius: 10px;
+            margin-top: 15px;
             transition: 0.3s;
         }
 
         .btn:hover {
-            background: #145dbf; /* темнее при наведении */
+            background: #145dbf;
         }
 
+        /* КАРТОЧКИ УСЛУГ */
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            width: 250px;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        /* ГАЛЕРЕЯ */
         .gallery {
             display: flex;
             justify-content: center;
@@ -68,12 +122,25 @@
             border-radius: 10px;
         }
 
+        /* ОТЗЫВЫ */
+        .reviews {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .review {
+            background: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+
+        /* ФУТЕР */
         footer {
             background: #2e7d32;
             color: white;
             padding: 20px;
             text-align: center;
-            font-size: 14px;
         }
 
     </style>
@@ -81,27 +148,92 @@
 
 <body>
 
+<!-- МЕНЮ -->
+<nav>
+    <a href="#about">О нас</a>
+    <a href="#services">Услуги</a>
+    <a href="#works">Работы</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#contact">Контакты</a>
+</nav>
+
+<!-- HEADER -->
 <header>
     <h1>Автополив под ключ</h1>
     <p>Системы Hunter и RainBird</p>
+    <a class="btn" href="#contact">Оставить заявку</a>
 </header>
 
-<section>
-    <h2>Наши услуги</h2>
-    <p>Проектирование, монтаж и обслуживание автополива</p>
+<!-- О НАС -->
+<section id="about">
+    <h2>О нас</h2>
+    <p>
+        Мы занимаемся установкой систем автополива под ключ.
+        Используем надежные системы Hunter и RainBird.
+        Работаем быстро, аккуратно и на результат.
+    </p>
 </section>
 
-<section>
-    <h2>Наши работы</h2>
-    <div class="gallery">
-        <img src="IMG_4674.jpg" alt="Проект 1">
-        <img src="IMG_4675.jpg" alt="Проект 2">
+<!-- УСЛУГИ -->
+<section id="services">
+    <h2>Наши услуги</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">💧</div>
+            <h3>Проектирование</h3>
+            <p>Создаем систему автополива под ваш участок</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🔧</div>
+            <h3>Монтаж</h3>
+            <p>Устанавливаем
+                дование под ключ</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌿</div>
+            <h3>Обслуживание</h3>
+            <p>Поддерживаем систему в идеальном состоянии</p>
+        </div>
+
     </div>
 </section>
 
-<section>
+<!-- РАБОТЫ -->
+<section id="works">
+    <h2>Наши работы</h2>
+    <div class="gallery">
+        <img src="img/IMG_4674.jpg" alt="Проект 1">
+        <img src="img/IMG_4675.jpg" alt="Проект 2">
+    </div>
+</section>
+
+<!-- ОТЗЫВЫ -->
+<section id="reviews">
+    <h2>Отзывы</h2>
+
+    <div class="reviews">
+
+        <div class="review">
+            <p>Сделали автополив быстро и качественно. Всё работает идеально.</p>
+        </div>
+
+        <div class="review">
+            <p>Очень довольны. Участок теперь всегда зелёный и ухоженный.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- КОНТАКТЫ -->
+<section id="contact">
     <h2>Связаться с нами</h2>
-    <a class="btn" href="https://max.ru/u/f9LHodD0cOJ8d73WSt0uIZOvPyTv9TNmv2CDTtdOgg2JSuMGc5QR-qsqmpk">Связаться в MAX</a>
+    <a class="btn" href="https://max.ru/u/f9LHodD0cOJ8d73WSt0uIZOvPyTv9TNmv2CDTtdOgg2JSuMGc5QR-qsqmpk">
+        Связаться в MAX
+    </a>
 </section>
 
 <footer>
@@ -109,4 +241,4 @@
 </footer>
 
 </body>
-</html>
+</html> обору
