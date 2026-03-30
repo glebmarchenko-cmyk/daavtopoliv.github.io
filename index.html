@@ -3,242 +3,619 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Автополив под ключ</title>
+    <title>ДА автополив</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            font-family: 'Montserrat', sans-serif;
+            background: #0b0f0d;
+            color: white;
+            overflow-x: hidden;
         }
 
-        /* НАВИГАЦИЯ */
+        /* Фоновые мягкие световые пятна */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -2;
+            opacity: 0.18;
+        }
+
+        body::before {
+            top: -120px;
+            left: -120px;
+            background: #2e7d32;
+        }
+
+        body::after {
+            right: -120px;
+            bottom: -120px;
+            background: #4CAF50;
+        }
+
+        /* Верхнее меню */
         nav {
-            background: #1b5e20;
-            padding: 15px;
-            text-align: center;
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 28px;
             z-index: 1000;
+            backdrop-filter: blur(14px);
+            background: rgba(8, 12, 10, 0.52);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        nav a {
-            color: white;
-            margin: 0 15px;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 0.3px;
+        }
+
+        .logo img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            padding: 4px;
+            box-sizing: border-box;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .menu a {
+            color: rgba(255,255,255,0.92);
             text-decoration: none;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.25s;
         }
 
-        nav a:hover {
-            text-decoration: underline;
+        .menu a:hover {
+            color: #9be28e;
         }
 
-        /* HEADER */
+        .burger {
+            display: none;
+            font-size: 26px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Главный экран */
         header {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                        url("img/my-background.jpg") center/cover no-repeat;
-            color: white;
-            padding: 80px 20px;
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(6, 10, 8, 0.42), rgba(6, 10, 8, 0.78)),
+                url("img/my-background.jpg") center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 120px 20px 60px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .hero-glass {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.10);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 32px 26px;
+            max-width: 760px;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+        }
+
+        .hero-logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .hero-logo img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.35));
         }
 
         header h1 {
             margin: 0;
-            font-size: 36px;
+            font-size: 54px;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         header p {
+            margin: 18px auto 0;
             font-size: 18px;
-            margin-top: 10px;
+            line-height: 1.7;
+            opacity: 0.92;
+            max-width: 640px;
         }
 
-        /* СЕКЦИИ */
+        .hero-buttons {
+            margin-top: 28px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: 0.3s ease;
+            letter-spacing: 0.2px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #56c34f, #2e7d32);
+            color: white;
+            box-shadow: 0 10px 30px rgba(46,125,50,0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 14px 38px rgba(46,125,50,0.45);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.08);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .scroll-note {
+            margin-top: 26px;
+            font-size: 13px;
+            opacity: 0.72;
+            letter-spacing: 0.4px;
+        }
+
+        /* Секции */
         section {
-            padding: 40px 20px;
+            padding: 95px 20px;
             text-align: center;
+            opacity: 0;
+            transform: translateY(44px);
+            transition: 0.8s ease;
+            position: relative;
         }
 
-        h2 {
-            color: #2e7d32;
-            margin-bottom: 20px;
+        section.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        p {
-            max-width: 700px;
+        .section-inner {
+            max-width: 1180px;
             margin: 0 auto;
         }
 
-        /* КНОПКИ */
-        .btn {
+        .section-label {
             display: inline-block;
-            padding: 12px 25px;
-            background: #1877F2;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            margin-top: 15px;
-            transition: 0.3s;
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #b7d9b1;
+            margin-bottom: 16px;
         }
 
-        .btn:hover {
-            background: #145dbf;
+        h2 {
+            margin: 0 0 18px;
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
-        /* КАРТОЧКИ УСЛУГ */
+        .section-text {
+            max-width: 760px;
+            margin: 0 auto;
+            color: rgba(255,255,255,0.82);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* Карточки */
         .cards {
+            margin-top: 34px;
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
+            flex-wrap: wrap;
+            gap: 22px;
         }
 
         .card {
-            background: white;
-            width: 250px;
-            margin: 10px;
-            padding: 20px;
-            border-radius: 12px;
-            transition: 0.3s;
+            width: 280px;
+            padding: 28px 24px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.20);
+            transition: 0.35s ease;
+            box-sizing: border-box;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.07);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.28);
         }
 
-        .icon {
-            font-size: 30px;
-            margin-bottom: 10px;
+        .card-icon {
+            font-size: 34px;
+            margin-bottom: 14px;
         }
 
-        /* ГАЛЕРЕЯ */
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+        }
+
+        .card p {
+            margin: 0;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* Галерея */
         .gallery {
+            margin-top: 34px;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
+            gap: 22px;
         }
 
-        .gallery img {
-            width: 250px;
-            margin: 10px;
-            border-radius: 10px;
+        .gallery-item {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            overflow: hidden;
+            width: 320px;
+            box-shadow: 0 14px 35px rgba(0,0,0,0.20);
+            transition: 0.35s ease;
         }
 
-        /* ОТЗЫВЫ */
-        .reviews {
-            max-width: 800px;
-            margin: auto;
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 48px rgba(0,0,0,0.30);
         }
 
-        .review {
-            background: white;
-            padding: 15px;
-            margin: 10px;
-            border-radius: 10px;
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
         }
 
-        /* ФУТЕР */
+        .gallery-caption {
+            padding: 16px 18px 18px;
+            text-align: left;
+        }
+
+        .gallery-caption h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .gallery-caption p {
+            margin: 0;
+            color: rgba(255,255,255,0.72);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Контакты */
+        .contact-box {
+            margin: 34px auto 0;
+            max-width: 700px;
+            padding: 30px 24px;
+            border-radius: 28px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.09);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 18px 44px rgba(0,0,0,0.24);
+        }
+
+        .contact-box p {
+            margin: 0;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+        }
+
+        .contact-actions {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* Футер */
         footer {
-            background: #2e7d32;
-            color: white;
-            padding: 20px;
+            padding: 34px 20px 42px;
             text-align: center;
+            color: rgba(255,255,255,0.55);
+            font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            margin-top: 20px;
         }
 
+        /* Мобильная версия */
+        @media (max-width: 900px) {
+            header h1 {
+                font-size: 42px;
+            }
+
+            h2 {
+                font-size: 31px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 14px 18px;
+            }
+
+            .menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 74px;
+                left: 0;
+                width: 100%;
+                background: rgba(8,12,10,0.98);
+                border-top: 1px solid rgba(255,255,255,0.08);
+            }
+
+            .menu a {
+                padding: 15px 18px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            header {
+                padding-top: 110px;
+            }
+
+            .hero-glass {
+                padding: 24px 18px;
+                border-radius: 22px;
+            }
+
+            .hero-logo img {
+                width: 92px;
+                height: 92px;
+            }
+
+            header h1 {
+                font-size: 34px;
+            }
+
+            header p {
+                font-size: 15px;
+            }
+
+            section {
+                padding: 80px 16px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .section-text {
+                font-size: 15px;
+            }
+
+            .logo span {
+                font-size: 16px;
+            }
+
+            .logo img {
+                width: 38px;
+                height: 38px;
+            }
+        }
     </style>
 </head>
-
 <body>
 
-<!-- МЕНЮ -->
 <nav>
-    <a href="#about">О нас</a>
-    <a href="#services">Услуги</a>
-    <a href="#works">Работы</a>
-    <a href="#reviews">Отзывы</a>
-    <a href="#contact">Контакты</a>
+    <div class="logo">
+        <img src="img/logo.png" alt="ДА автополив">
+        <span>ДА автополив</span>
+    </div>
+
+    <div class="burger" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
+        <a href="#about">О нас</a>
+        <a href="#services">Услуги</a>
+        <a href="#works">Работы</a>
+        <a href="#contact">Контакты</a>
+    </div>
 </nav>
 
-<!-- HEADER -->
 <header>
-    <h1>Автополив под ключ</h1>
-    <p>Системы Hunter и RainBird</p>
-    <a class="btn" href="#contact">Оставить заявку</a>
+    <div class="hero-glass">
+        <div class="hero-logo">
+            <img src="img/logo.png" alt="ДА автополив">
+        </div>
+        <p>Премиальные системы автополива для частных домов, садов и ландшафтных проектов</p>
+
+        <div class="hero-buttons">
+            <a class="btn btn-primary" href="https://max.ru/u/f9LHodD0cOJqcSXvWud7ovTfTMkCtQk4Cwhu7j29Et6NJNkt8e-JeLGZksU">Связаться в MAX</a>
+            <a class="btn btn-secondary" href="#works">Смотреть работы</a>
+        </div>
+
+        <div class="scroll-note">Прокрутите вниз, чтобы посмотреть информацию о компании</div>
+    </div>
 </header>
 
-<!-- О НАС -->
 <section id="about">
-    <h2>О нас</h2>
-    <p>
-        Мы занимаемся установкой систем автополива под ключ.
-        Используем надежные системы Hunter и RainBird.
-        Работаем быстро, аккуратно и на результат.
-    </p>
+    <div class="section-inner">
+        <div class="section-label">о компании</div>
+        <h2>ДА автополив</h2>
+        <p class="section-text">
+            Мы создаём современные системы автополива премиального уровня для частных участков, садов и ландшафтных пространств.
+            В работе используем надёжное оборудование Hunter и RainBird, уделяем внимание эстетике, долговечности и качеству каждой детали.
+        </p>
+    </div>
 </section>
 
-<!-- УСЛУГИ -->
 <section id="services">
-    <h2>Наши услуги</h2>
+    <div class="section-inner">
+        <div class="section-label">услуги</div>
+        <h2>Что мы делаем</h2>
 
-    <div class="cards">
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">💧</div>
+                <h3>Проектирование</h3>
+                <p>Разрабатываем индивидуальную систему автополива с учётом особенностей участка, растений и ландшафта.</p>
+            </div>
 
-        <div class="card">
-            <div class="icon">💧</div>
-            <h3>Проектирование</h3>
-            <p>Создаем систему автополива под ваш участок</p>
+            <div class="card">
+                <div class="card-icon">🔧</div>
+                <h3>Монтаж</h3>
+                <p>Выполняем установку оборудования под ключ аккуратно, точно и с вниманием к каждой зоне полива.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🌿</div>
+                <h3>Обслуживание</h3>
+                <p>Настраиваем, проверяем и поддерживаем систему, чтобы она стабильно работала в течение всего сезона.</p>
+            </div>
         </div>
-
-        <div class="card">
-            <div class="icon">🔧</div>
-            <h3>Монтаж</h3>
-            <p>Устанавливаем
-                дование под ключ</p>
-        </div>
-
-        <div class="card">
-            <div class="icon">🌿</div>
-            <h3>Обслуживание</h3>
-            <p>Поддерживаем систему в идеальном состоянии</p>
-        </div>
-
     </div>
 </section>
 
-<!-- РАБОТЫ -->
 <section id="works">
-    <h2>Наши работы</h2>
-    <div class="gallery">
-        <img src="img/IMG_4674.jpg" alt="Проект 1">
-        <img src="img/IMG_4675.jpg" alt="Проект 2">
+    <div class="section-inner">
+        <div class="section-label">портфолио</div>
+        <h2>Наши работы</h2>
+
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="img/IMG_4674.jpg" alt="Проект 1">
+                <div class="gallery-caption">
+                    <h3>Частный участок</h3>
+                    <p>Аккуратная система автополива для ухоженного и стабильного зелёного ландшафта.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="img/IMG_4675.jpg" alt="Проект 2">
+                <div class="gallery-caption">
+                    <h3>Ландшафтный проект</h3>
+                    <p>Современное решение с продуманным распределением зон полива и эстетичной реализацией.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- ОТЗЫВЫ -->
-<section id="reviews">
-    <h2>Отзывы</h2>
-
-    <div class="reviews">
-
-        <div class="review">
-            <p>Сделали автополив быстро и качественно. Всё работает идеально.</p>
-        </div>
-
-        <div class="review">
-            <p>Очень довольны. Участок теперь всегда зелёный и ухоженный.</p>
-        </div>
-
-    </div>
-</section>
-
-<!-- КОНТАКТЫ -->
 <section id="contact">
-    <h2>Связаться с нами</h2>
-    <a class="btn" href="https://max.ru/u/f9LHodD0cOJ8d73WSt0uIZOvPyTv9TNmv2CDTtdOgg2JSuMGc5QR-qsqmpk">
-        Связаться в MAX
-    </a>
+    <div class="section-inner">
+        <div class="section-label">контакты</div>
+        <h2>Связаться с нами</h2>
+
+        <div class="contact-box">
+            <p>
+                Если вам нужен автополив для частного дома, сада или ландшафтного проекта, напишите нам в MAX.
+                Обсудим задачу, подскажем оптимальное решение и ответим на все вопросы.
+            </p>
+
+            <div class="contact-actions">
+                <a class="btn btn-primary" href="https://max.ru/u/f9LHodD0cOJqcSXvWud7ovTfTMkCtQk4Cwhu7j29Et6NJNkt8e-JeLGZksU">Написать в MAX</a>
+                <a class="btn btn-secondary" href="#about">Узнать о нас</a>
+            </div>
+        </div>
+    </div>
 </section>
 
 <footer>
-    © 2026 Автополив под ключ — Все права защищены
+    © 2026 ДА автополив
 </footer>
 
+<script>
+    function toggleMenu() {
+        document.getElementById("menu").classList.toggle("active");
+    }
+
+    const sections = document.querySelectorAll("section");
+
+    function revealSections() {
+        sections.forEach(section => {
+            const top = section.getBoundingClientRect().top;
+            if (top < window.innerHeight - 100) {
+                section.classList.add("show");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", revealSections);
+    window.addEventListener("load", revealSections);
+
+    document.querySelectorAll('.menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById("menu").classList.remove("active");
+        });
+    });
+</script>
+
 </body>
-</html> обору
+</html>
