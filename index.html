@@ -60,6 +60,136 @@
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
+.why-layout {
+    margin-top: 40px;
+}
+
+.why-item {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.why-item img {
+    width: 420px;
+    max-width: 100%;
+    border-radius: 22px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+}
+
+.why-text {
+    flex: 1;
+    text-align: left;
+}
+
+.why-text h3 {
+    font-size: 30px;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.why-text p {
+    font-size: 17px;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.82);
+}
+
+.why-main-text {
+    max-width: 760px;
+    margin: 0 auto 40px;
+    font-size: 18px;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.82);
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.why-box {
+    padding: 30px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(14px);
+    text-align: left;
+    transition: 0.35s ease;
+}
+
+.why-box:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,0.07);
+}
+
+.why-box h3 {
+    margin: 0;
+    font-size: 38px;
+    color: #9be28e;
+    font-weight: 800;
+}
+
+.why-box h4 {
+    margin: 14px 0 12px;
+    font-size: 22px;
+}
+
+.why-box p {
+    margin: 0;
+    color: rgba(255,255,255,0.76);
+    line-height: 1.8;
+}
+
+max-width: 768px {
+    .why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .why-main-text {
+        font-size: 16px;
+    }
+
+    .why-box h3 {
+        font-size: 32px;
+    }
+
+    .why-box h4 {
+        font-size: 20px;
+    }
+}
+
+.reverse {
+    flex-direction: row-reverse;
+}
+
+/* мобильная версия */
+max-width: 768px {
+    .why-item,
+    .reverse {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .why-text {
+        text-align: center;
+    }
+
+    .why-item img {
+        width: 100%;
+    }
+
+    .why-text h3 {
+        font-size: 24px;
+    }
+
+    .why-text p {
+        font-size: 15px;
+    }
+}
+
         .logo {
             display: flex;
             align-items: center;
@@ -288,6 +418,33 @@
             font-size: 34px;
             margin-bottom: 14px;
         }
+
+       .card-image {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 190px;
+    padding: 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+        .card-image img {
+    width: 100%;
+    height: auto;
+    max-height: 190px;
+    object-fit: contain;
+    border-radius: 18px;
+    display: block;
+    transition: 0.35s ease;
+    background: rgba(255,255,255,0.04);
+}
+
+.card:hover .card-image img {
+    transform: scale(1.03);
+}
 
         .card h3 {
             margin: 0 0 10px;
@@ -570,82 +727,110 @@
 
 <section id="why">
     <div class="section-inner">
-        <div class="section-label">преимущества</div>
-        <h2>Почему выбирают нас</h2>
-        <p class="section-text">
-            Мы делаем ставку на надёжность, аккуратный монтаж и решения, которые действительно работают долго и стабильно.
-        </p>
+    <div class="section-label">преимущества</div>
+    <h2>Почему выбирают нас</h2>
 
-        <div class="cards">
-            <div class="card">
-                <div class="card-icon">⭐</div>
-                <h3>Опыт</h3>
-                <p>Более 5 лет работы с системами автополива и множество реализованных проектов разного уровня.</p>
-            </div>
+    <p class="why-main-text">
+        Мы создаём не просто системы автополива, а продуманные решения,
+        которые работают надёжно, выглядят аккуратно и сохраняют идеальное
+        состояние участка в течение всего сезона.
+    </p>
 
-            <div class="card">
-                <div class="card-icon">💧</div>
-                <h3>Надёжность</h3>
-                <p>Используем только проверенные системы Hunter и RainBird, которым действительно можно доверять.</p>
-            </div>
+    <div class="why-grid">
 
-            <div class="card">
-                <div class="card-icon">⚡</div>
-                <h3>Скорость</h3>
-                <p>Работаем организованно и аккуратно, без лишних задержек и хаоса на участке.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🎯</div>
-                <h3>Подход</h3>
-                <p>Подбираем решение индивидуально под участок, растения и особенности ландшафта.</p>
-            </div>
+        <div class="why-box">
+            <h3>01</h3>
+            <h4>Опыт и качество</h4>
+            <p>
+                Более 5 лет работы с современными системами Hunter и RainBird.
+                Каждый проект продуман до деталей.
+            </p>
         </div>
 
-        <div class="stats">
-            <div class="stat">
-                <h3>50+</h3>
-                <p>проектов</p>
-            </div>
-
-            <div class="stat">
-                <h3>5+</h3>
-                <p>лет опыта</p>
-            </div>
-
-            <div class="stat">
-                <h3>100%</h3>
-                <p>внимания к качеству</p>
-            </div>
+        <div class="why-box">
+            <h3>02</h3>
+            <h4>Индивидуальный подход</h4>
+            <p>
+                Подбираем решение под конкретный участок, растения
+                и особенности ландшафта.
+            </p>
         </div>
+
+        <div class="why-box">
+            <h3>03</h3>
+            <h4>Надёжный монтаж</h4>
+            <p>
+                Устанавливаем систему аккуратно и профессионально,
+                чтобы она работала долгие годы.
+            </p>
+        </div>
+
+        <div class="why-box">
+            <h3>04</h3>
+            <h4>Поддержка</h4>
+            <p>
+                Помогаем с настройкой, обслуживанием и сезонной
+                подготовкой системы.
+            </p>
+        </div>
+
     </div>
-</section>
+</div>
 
 <section id="services">
     <div class="section-inner">
         <div class="section-label">услуги</div>
         <h2>Что мы делаем</h2>
 
-        <div class="cards">
-            <div class="card">
-                <div class="card-icon">💧</div>
-                <h3>Проектирование</h3>
-                <p>Разрабатываем индивидуальную систему автополива с учётом особенностей участка, растений и ландшафта.</p>
-            </div>
+       <div class="why-layout">
 
-            <div class="card">
-                <div class="card-icon">🔧</div>
-                <h3>Монтаж</h3>
-                <p>Выполняем установку оборудования под ключ аккуратно, точно и с вниманием к каждой зоне полива.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🌿</div>
-                <h3>Обслуживание</h3>
-                <p>Настраиваем, проверяем и поддерживаем систему, чтобы она стабильно работала в течение всего сезона.</p>
-            </div>
+    <div class="why-item">
+        <img src="img/1.png" alt="Красивый сад">
+        <div class="why-text">
+            <h3>Опыт и эстетика</h3>
+            <p>
+                Мы создаём системы автополива, которые не только работают идеально,
+                но и сохраняют красоту участка. Каждый проект продуман с точки зрения
+                ландшафта, растений и визуального стиля.
+            </p>
         </div>
     </div>
+
+    <div class="why-item reverse">
+        <img src="img/2.png" alt="Контроллер">
+        <div class="why-text">
+            <h3>Современные технологии</h3>
+            <p>
+                Используем современные контроллеры и автоматику, которые позволяют
+                гибко настраивать режим полива и управлять системой удобно и надёжно.
+            </p>
+        </div>
+    </div>
+
+    <div class="why-item">
+        <img src="img/3.png" alt="Система">
+        <div class="why-text">
+            <h3>Профессиональный монтаж</h3>
+            <p>
+                Все системы собираются аккуратно и грамотно: клапаны, магистрали,
+                зоны полива и технические элементы устанавливаются с расчётом
+                на долгую и стабильную работу.
+            </p>
+        </div>
+    </div>
+
+    <div class="why-item reverse">
+        <img src="img/4.png" alt="Дождеватель">
+        <div class="why-text">
+            <h3>Идеальный полив</h3>
+            <p>
+                Мы настраиваем равномерный полив без сухих зон и перелива,
+                чтобы газон и растения всегда оставались зелёными и ухоженными.
+            </p>
+        </div>
+    </div>
+
+</div>
 </section>
 
 <section id="works">
