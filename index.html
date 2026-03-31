@@ -12,6 +12,10 @@
             scroll-behavior: smooth;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: 'Montserrat', sans-serif;
@@ -30,6 +34,7 @@
             filter: blur(120px);
             z-index: -2;
             opacity: 0.18;
+            pointer-events: none;
         }
 
         body::before {
@@ -56,139 +61,10 @@
             padding: 15px 28px;
             z-index: 1000;
             backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             background: rgba(8, 12, 10, 0.52);
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
-
-.why-layout {
-    margin-top: 40px;
-}
-
-.why-item {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 60px;
-}
-
-.why-item img {
-    width: 420px;
-    max-width: 100%;
-    border-radius: 22px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-}
-
-.why-text {
-    flex: 1;
-    text-align: left;
-}
-
-.why-text h3 {
-    font-size: 30px;
-    margin-bottom: 16px;
-    font-weight: 700;
-}
-
-.why-text p {
-    font-size: 17px;
-    line-height: 1.9;
-    color: rgba(255,255,255,0.82);
-}
-
-.why-main-text {
-    max-width: 760px;
-    margin: 0 auto 40px;
-    font-size: 18px;
-    line-height: 1.9;
-    color: rgba(255,255,255,0.82);
-}
-
-.why-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 22px;
-    margin-top: 30px;
-}
-
-.why-box {
-    padding: 30px;
-    border-radius: 24px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
-    backdrop-filter: blur(14px);
-    text-align: left;
-    transition: 0.35s ease;
-}
-
-.why-box:hover {
-    transform: translateY(-6px);
-    background: rgba(255,255,255,0.07);
-}
-
-.why-box h3 {
-    margin: 0;
-    font-size: 38px;
-    color: #9be28e;
-    font-weight: 800;
-}
-
-.why-box h4 {
-    margin: 14px 0 12px;
-    font-size: 22px;
-}
-
-.why-box p {
-    margin: 0;
-    color: rgba(255,255,255,0.76);
-    line-height: 1.8;
-}
-
-max-width: 768px {
-    .why-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .why-main-text {
-        font-size: 16px;
-    }
-
-    .why-box h3 {
-        font-size: 32px;
-    }
-
-    .why-box h4 {
-        font-size: 20px;
-    }
-}
-
-.reverse {
-    flex-direction: row-reverse;
-}
-
-/* мобильная версия */
-max-width: 768px {
-    .why-item,
-    .reverse {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .why-text {
-        text-align: center;
-    }
-
-    .why-item img {
-        width: 100%;
-    }
-
-    .why-text h3 {
-        font-size: 24px;
-    }
-
-    .why-text p {
-        font-size: 15px;
-    }
-}
 
         .logo {
             display: flex;
@@ -197,6 +73,7 @@ max-width: 768px {
             font-weight: 700;
             font-size: 18px;
             letter-spacing: 0.3px;
+            min-width: 0;
         }
 
         .logo img {
@@ -207,6 +84,11 @@ max-width: 768px {
             background: rgba(255,255,255,0.05);
             padding: 4px;
             box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        .logo span {
+            white-space: nowrap;
         }
 
         .menu {
@@ -229,9 +111,23 @@ max-width: 768px {
 
         .burger {
             display: none;
-            font-size: 26px;
+            font-size: 22px;
             cursor: pointer;
             user-select: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.10);
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .burger:hover {
+            background: rgba(255,255,255,0.14);
+            transform: scale(1.04);
         }
 
         header {
@@ -253,6 +149,7 @@ max-width: 768px {
             background: rgba(255,255,255,0.06);
             border: 1px solid rgba(255,255,255,0.10);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 28px;
             padding: 32px 26px;
             max-width: 760px;
@@ -272,6 +169,7 @@ max-width: 768px {
             height: 120px;
             object-fit: contain;
             filter: drop-shadow(0 10px 30px rgba(0,0,0,0.35));
+            max-width: 100%;
         }
 
         header p {
@@ -299,6 +197,7 @@ max-width: 768px {
             font-size: 14px;
             transition: 0.3s ease;
             letter-spacing: 0.2px;
+            text-align: center;
         }
 
         .btn-primary {
@@ -318,20 +217,20 @@ max-width: 768px {
             border: 1px solid rgba(255,255,255,0.12);
         }
 
-        .btn-instagram {
-    background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCAF45);
-    color: white;
-    box-shadow: 0 10px 30px rgba(253, 29, 29, 0.25);
-}
-
-.btn-instagram:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 14px 38px rgba(253, 29, 29, 0.35);
-}
-
         .btn-secondary:hover {
             transform: translateY(-2px);
             background: rgba(255,255,255,0.12);
+        }
+
+        .btn-instagram {
+            background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCAF45);
+            color: white;
+            box-shadow: 0 10px 30px rgba(253, 29, 29, 0.25);
+        }
+
+        .btn-instagram:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 14px 38px rgba(253, 29, 29, 0.35);
         }
 
         .scroll-note {
@@ -380,12 +279,101 @@ max-width: 768px {
             letter-spacing: -0.5px;
         }
 
-        .section-text {
+        .section-text,
+        .why-main-text {
             max-width: 760px;
             margin: 0 auto;
             color: rgba(255,255,255,0.82);
             line-height: 1.8;
             font-size: 16px;
+        }
+
+        .why-main-text {
+            margin-bottom: 40px;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+            margin-top: 30px;
+        }
+
+        .why-box {
+            padding: 30px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            text-align: left;
+            transition: 0.35s ease;
+        }
+
+        .why-box:hover {
+            transform: translateY(-6px);
+            background: rgba(255,255,255,0.07);
+        }
+
+        .why-box h3 {
+            margin: 0;
+            font-size: 38px;
+            color: #9be28e;
+            font-weight: 800;
+        }
+
+        .why-box h4 {
+            margin: 14px 0 12px;
+            font-size: 22px;
+        }
+
+        .why-box p {
+            margin: 0;
+            color: rgba(255,255,255,0.76);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .why-layout {
+            margin-top: 40px;
+        }
+
+        .why-item {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .why-item img {
+            width: 420px;
+            max-width: 100%;
+            border-radius: 22px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            display: block;
+            object-fit: cover;
+        }
+
+        .why-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .why-text h3 {
+            font-size: 30px;
+            margin: 0 0 16px;
+            font-weight: 700;
+        }
+
+        .why-text p {
+            font-size: 17px;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.82);
+            margin: 0;
+        }
+
+        .reverse {
+            flex-direction: row-reverse;
         }
 
         .cards {
@@ -403,9 +391,9 @@ max-width: 768px {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.08);
             backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.20);
             transition: 0.35s ease;
-            box-sizing: border-box;
         }
 
         .card:hover {
@@ -413,38 +401,6 @@ max-width: 768px {
             background: rgba(255,255,255,0.07);
             box-shadow: 0 18px 40px rgba(0,0,0,0.28);
         }
-
-        .card-icon {
-            font-size: 34px;
-            margin-bottom: 14px;
-        }
-
-       .card-image {
-    margin-bottom: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 190px;
-    padding: 10px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.06);
-}
-
-        .card-image img {
-    width: 100%;
-    height: auto;
-    max-height: 190px;
-    object-fit: contain;
-    border-radius: 18px;
-    display: block;
-    transition: 0.35s ease;
-    background: rgba(255,255,255,0.04);
-}
-
-.card:hover .card-image img {
-    transform: scale(1.03);
-}
 
         .card h3 {
             margin: 0 0 10px;
@@ -456,38 +412,6 @@ max-width: 768px {
             color: rgba(255,255,255,0.75);
             line-height: 1.7;
             font-size: 15px;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 22px;
-            margin-top: 34px;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            min-width: 190px;
-            padding: 24px 20px;
-            border-radius: 22px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            backdrop-filter: blur(14px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.20);
-        }
-
-        .stat h3 {
-            margin: 0;
-            font-size: 34px;
-            color: #9be28e;
-            font-weight: 800;
-        }
-
-        .stat p {
-            margin: 8px 0 0;
-            color: rgba(255,255,255,0.72);
-            font-size: 14px;
-            letter-spacing: 0.2px;
         }
 
         .gallery {
@@ -545,6 +469,7 @@ max-width: 768px {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.09);
             backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             box-shadow: 0 18px 44px rgba(0,0,0,0.24);
         }
 
@@ -575,6 +500,10 @@ max-width: 768px {
             h2 {
                 font-size: 31px;
             }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -583,62 +512,58 @@ max-width: 768px {
             }
 
             .menu {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 74px;
-    right: 16px;
-    width: calc(100% - 32px);
-    background: rgba(18, 24, 20, 0.82);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(255,255,255,0.10);
-    border-radius: 22px;
-    box-shadow: 0 18px 45px rgba(0,0,0,0.35);
-    overflow: hidden;
-    gap: 0;
-}
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 74px;
+                right: 16px;
+                width: calc(100% - 32px);
+                background: rgba(18, 24, 20, 0.82);
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+                border: 1px solid rgba(255,255,255,0.10);
+                border-radius: 22px;
+                box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+                overflow: hidden;
+                gap: 0;
+            }
+
+            .menu a {
+                padding: 16px 18px;
+                border-top: 1px solid rgba(255,255,255,0.06);
+                color: rgba(255,255,255,0.92);
+                font-size: 15px;
+                font-weight: 600;
+                text-align: left;
+                transition: 0.25s ease;
+            }
 
             .menu a:hover {
-    background: rgba(255,255,255,0.06);
-    color: #9be28e;
-    padding-left: 22px;
-}
-           .menu a {
-    padding: 16px 18px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    color: rgba(255,255,255,0.92);
-    font-size: 15px;
-    font-weight: 600;
-    text-align: left;
-    transition: 0.25s ease;
-}
+                background: rgba(255,255,255,0.06);
+                color: #9be28e;
+                padding-left: 22px;
+            }
+
             .menu.active {
                 display: flex;
             }
 
             .burger {
-    display: flex;
-    font-size: 22px;
-    cursor: pointer;
-    user-select: none;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.10);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.25s ease;
-}
-            .burger:hover {
-    background: rgba(255,255,255,0.14);
-    transform: scale(1.04);
-}
+                display: flex;
+            }
+
+            .logo span {
+                font-size: 16px;
+            }
+
+            .logo img {
+                width: 38px;
+                height: 38px;
+            }
 
             header {
-                padding-top: 110px;
+                padding: 110px 16px 40px;
+                min-height: auto;
             }
 
             .hero-glass {
@@ -655,6 +580,15 @@ max-width: 768px {
                 font-size: 15px;
             }
 
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
             section {
                 padding: 80px 16px;
             }
@@ -663,17 +597,79 @@ max-width: 768px {
                 font-size: 28px;
             }
 
-            .section-text {
+            .section-text,
+            .why-main-text {
                 font-size: 15px;
             }
 
-            .logo span {
-                font-size: 16px;
+            .why-box {
+                padding: 24px 20px;
             }
 
-            .logo img {
-                width: 38px;
-                height: 38px;
+            .why-box h3 {
+                font-size: 32px;
+            }
+
+            .why-box h4 {
+                font-size: 20px;
+            }
+
+            .why-item,
+            .reverse {
+                flex-direction: column;
+                text-align: center;
+                gap: 22px;
+                margin-bottom: 44px;
+            }
+
+            .why-text {
+                text-align: center;
+            }
+
+            .why-item img {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .why-text h3 {
+                font-size: 24px;
+            }
+
+            .why-text p {
+                font-size: 15px;
+                line-height: 1.8;
+            }
+
+            .gallery {
+                gap: 18px;
+            }
+
+            .gallery-item {
+                width: 100%;
+                max-width: 420px;
+            }
+
+            .gallery-item img {
+                height: auto;
+                aspect-ratio: 4 / 3;
+            }
+
+            .contact-box {
+                padding: 24px 18px;
+                border-radius: 22px;
+            }
+
+            .contact-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .contact-actions .btn {
+                width: 100%;
+            }
+
+            footer {
+                padding: 30px 16px 36px;
             }
         }
     </style>
@@ -727,110 +723,108 @@ max-width: 768px {
 
 <section id="why">
     <div class="section-inner">
-    <div class="section-label">преимущества</div>
-    <h2>Почему выбирают нас</h2>
+        <div class="section-label">преимущества</div>
+        <h2>Почему выбирают нас</h2>
 
-    <p class="why-main-text">
-        Мы создаём не просто системы автополива, а продуманные решения,
-        которые работают надёжно, выглядят аккуратно и сохраняют идеальное
-        состояние участка в течение всего сезона.
-    </p>
+        <p class="why-main-text">
+            Мы создаём не просто системы автополива, а продуманные решения,
+            которые работают надёжно, выглядят аккуратно и сохраняют идеальное
+            состояние участка в течение всего сезона.
+        </p>
 
-    <div class="why-grid">
+        <div class="why-grid">
+            <div class="why-box">
+                <h3>01</h3>
+                <h4>Опыт и качество</h4>
+                <p>
+                    Более 5 лет работы с современными системами Hunter и RainBird.
+                    Каждый проект продуман до деталей.
+                </p>
+            </div>
 
-        <div class="why-box">
-            <h3>01</h3>
-            <h4>Опыт и качество</h4>
-            <p>
-                Более 5 лет работы с современными системами Hunter и RainBird.
-                Каждый проект продуман до деталей.
-            </p>
+            <div class="why-box">
+                <h3>02</h3>
+                <h4>Индивидуальный подход</h4>
+                <p>
+                    Подбираем решение под конкретный участок, растения
+                    и особенности ландшафта.
+                </p>
+            </div>
+
+            <div class="why-box">
+                <h3>03</h3>
+                <h4>Надёжный монтаж</h4>
+                <p>
+                    Устанавливаем систему аккуратно и профессионально,
+                    чтобы она работала долгие годы.
+                </p>
+            </div>
+
+            <div class="why-box">
+                <h3>04</h3>
+                <h4>Поддержка</h4>
+                <p>
+                    Помогаем с настройкой, обслуживанием и сезонной
+                    подготовкой системы.
+                </p>
+            </div>
         </div>
-
-        <div class="why-box">
-            <h3>02</h3>
-            <h4>Индивидуальный подход</h4>
-            <p>
-                Подбираем решение под конкретный участок, растения
-                и особенности ландшафта.
-            </p>
-        </div>
-
-        <div class="why-box">
-            <h3>03</h3>
-            <h4>Надёжный монтаж</h4>
-            <p>
-                Устанавливаем систему аккуратно и профессионально,
-                чтобы она работала долгие годы.
-            </p>
-        </div>
-
-        <div class="why-box">
-            <h3>04</h3>
-            <h4>Поддержка</h4>
-            <p>
-                Помогаем с настройкой, обслуживанием и сезонной
-                подготовкой системы.
-            </p>
-        </div>
-
     </div>
-</div>
+</section>
 
 <section id="services">
     <div class="section-inner">
         <div class="section-label">услуги</div>
         <h2>Что мы делаем</h2>
 
-       <div class="why-layout">
+        <div class="why-layout">
+            <div class="why-item">
+                <img src="img/1.png" alt="Красивый сад" loading="lazy">
+                <div class="why-text">
+                    <h3>Опыт и эстетика</h3>
+                    <p>
+                        Мы создаём системы автополива, которые не только работают идеально,
+                        но и сохраняют красоту участка. Каждый проект продуман с точки зрения
+                        ландшафта, растений и визуального стиля.
+                    </p>
+                </div>
+            </div>
 
-    <div class="why-item">
-        <img src="img/1.png" alt="Красивый сад">
-        <div class="why-text">
-            <h3>Опыт и эстетика</h3>
-            <p>
-                Мы создаём системы автополива, которые не только работают идеально,
-                но и сохраняют красоту участка. Каждый проект продуман с точки зрения
-                ландшафта, растений и визуального стиля.
-            </p>
+            <div class="why-item reverse">
+                <img src="img/2.png" alt="Контроллер" loading="lazy">
+                <div class="why-text">
+                    <h3>Современные технологии</h3>
+                    <p>
+                        Используем современные контроллеры и автоматику, которые позволяют
+                        гибко настраивать режим полива и управлять системой удобно и надёжно.
+                    </p>
+                </div>
+            </div>
+
+            <div class="why-item">
+                <img src="img/3.png" alt="Система" loading="lazy">
+                <div class="why-text">
+                    <h3>Профессиональный монтаж</h3>
+                    <p>
+                        Все системы собираются аккуратно и грамотно: клапаны, магистрали,
+                        зоны полива и технические элементы устанавливаются с расчётом
+                        на долгую и стабильную работу.
+                    </p>
+                </div>
+            </div>
+
+            <div class="why-item reverse">
+                <img src="img/4.png" alt="Дождеватель" loading="lazy">
+                <div class="why-text">
+                    <h3>Идеальный полив</h3>
+                    <p>
+                        Мы настраиваем равномерный полив без сухих зон и перелива,
+                        чтобы газон и растения всегда оставались зелёными и ухоженными.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="why-item reverse">
-        <img src="img/2.png" alt="Контроллер">
-        <div class="why-text">
-            <h3>Современные технологии</h3>
-            <p>
-                Используем современные контроллеры и автоматику, которые позволяют
-                гибко настраивать режим полива и управлять системой удобно и надёжно.
-            </p>
-        </div>
-    </div>
-
-    <div class="why-item">
-        <img src="img/3.png" alt="Система">
-        <div class="why-text">
-            <h3>Профессиональный монтаж</h3>
-            <p>
-                Все системы собираются аккуратно и грамотно: клапаны, магистрали,
-                зоны полива и технические элементы устанавливаются с расчётом
-                на долгую и стабильную работу.
-            </p>
-        </div>
-    </div>
-
-    <div class="why-item reverse">
-        <img src="img/4.png" alt="Дождеватель">
-        <div class="why-text">
-            <h3>Идеальный полив</h3>
-            <p>
-                Мы настраиваем равномерный полив без сухих зон и перелива,
-                чтобы газон и растения всегда оставались зелёными и ухоженными.
-            </p>
-        </div>
-    </div>
-
-</div>
 </section>
 
 <section id="works">
@@ -840,7 +834,7 @@ max-width: 768px {
 
         <div class="gallery">
             <div class="gallery-item">
-                <img src="img/IMG_4674.jpg" alt="Проект 1">
+                <img src="img/IMG_4674.jpg" alt="Проект 1" loading="lazy">
                 <div class="gallery-caption">
                     <h3>Частный участок</h3>
                     <p>Аккуратная система автополива для ухоженного и стабильного зелёного ландшафта.</p>
@@ -848,7 +842,7 @@ max-width: 768px {
             </div>
 
             <div class="gallery-item">
-                <img src="img/IMG_4675.jpg" alt="Проект 2">
+                <img src="img/IMG_4675.jpg" alt="Проект 2" loading="lazy">
                 <div class="gallery-caption">
                     <h3>Ландшафтный проект</h3>
                     <p>Современное решение с продуманным распределением зон полива и эстетичной реализацией.</p>
@@ -871,9 +865,7 @@ max-width: 768px {
 
             <div class="contact-actions">
                 <a class="btn btn-primary" href="https://max.ru/u/f9LHodD0cOJqcSXvWud7ovTfTMkCtQk4Cwhu7j29Et6NJNkt8e-JeLGZksU">Написать в MAX</a>
-                <a class="btn btn-instagram" href="https://www.instagram.com/dmitriy.marchenko_?igsh=OTlqOGZsbWptcXJv&utm_source=qr" target="_blank">
-    Instagram
-</a>
+                <a class="btn btn-instagram" href="https://www.instagram.com/dmitriy.marchenko_?igsh=OTlqOGZsbWptcXJv&utm_source=qr" target="_blank">Instagram</a>
                 <a class="btn btn-secondary" href="#about">Узнать о нас</a>
             </div>
         </div>
